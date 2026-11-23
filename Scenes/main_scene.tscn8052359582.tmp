@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://chfvo3j2rrsr7"]
+
+[ext_resource type="Script" uid="uid://bx56fqqmkei7k" path="res://Scripts/player.gd" id="1_6l7je"]
+[ext_resource type="PackedScene" uid="uid://bxrc002v2lbfd" path="res://Scenes/collectable.tscn" id="3_jv6wh"]
+[ext_resource type="Texture2D" uid="uid://bxjsf7gfwupo1" path="res://blueberry_godot.png" id="3_x6ack"]
+[ext_resource type="Texture2D" uid="uid://cxholtsdkckv7" path="res://crow-godot.png" id="4_6ev3c"]
+[ext_resource type="PackedScene" uid="uid://bdyk13pxa1uxd" path="res://Scenes/basket.tscn" id="4_iacmt"]
+[ext_resource type="Texture2D" uid="uid://cgrfgelpdmtam" path="res://hill.jpg" id="5_6ev3c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2c62f"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jv6wh"]
+radius = 73.97973
+
+[node name="Main_Scene" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(581, 269)
+scale = Vector2(2.119428, 2.119428)
+texture = ExtResource("5_6ev3c")
+
+[node name="Basket" parent="." instance=ExtResource("4_iacmt")]
+position = Vector2(585, 543)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(583, 261)
+script = ExtResource("1_6l7je")
+
+[node name="Player_Sprite" type="Sprite2D" parent="Player"]
+scale = Vector2(0.311484, 0.311484)
+texture = ExtResource("4_6ev3c")
+
+[node name="Player_Collision" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_2c62f")
+
+[node name="Pickup_Area" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Pickup_Area"]
+shape = SubResource("CircleShape2D_jv6wh")
+debug_color = Color(0.89307183, 0.2246201, 0.58406883, 0.41960785)
+
+[node name="Held_Collectable" type="Sprite2D" parent="Player"]
+visible = false
+position = Vector2(-1, 47)
+scale = Vector2(0.11028741, 0.11028741)
+texture = ExtResource("3_x6ack")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+
+[node name="Collectable_Counter" type="Label" parent="Player/CanvasLayer"]
+offset_left = 838.0
+offset_top = 8.0
+offset_right = 1129.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 64
+text = "Berries: 0"
+
+[node name="Collectables" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Collectable" parent="Collectables" instance=ExtResource("3_jv6wh")]
+position = Vector2(1020, 422.00003)
+
+[node name="Collectable2" parent="Collectables" instance=ExtResource("3_jv6wh")]
+position = Vector2(1086, 448)
+
+[node name="Collectable3" parent="Collectables" instance=ExtResource("3_jv6wh")]
+position = Vector2(1123, 393)
+
+[node name="Collectable4" parent="Collectables" instance=ExtResource("3_jv6wh")]
+position = Vector2(939, 410)
+
+[node name="Collectable5" parent="Collectables" instance=ExtResource("3_jv6wh")]
+position = Vector2(41, 380)
+
+[node name="Collectable6" parent="Collectables" instance=ExtResource("3_jv6wh")]
+position = Vector2(121, 387)
+
+[node name="Collectable7" parent="Collectables" instance=ExtResource("3_jv6wh")]
+position = Vector2(214, 424)
+
+[connection signal="area_entered" from="Player/Pickup_Area" to="Player" method="_on_pickup_area_area_entered"]

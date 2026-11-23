@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxrc002v2lbfd"]
+
+[ext_resource type="Texture2D" uid="uid://bxjsf7gfwupo1" path="res://blueberry_godot.png" id="1_3rsma"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_un20x"]
+radius = 72.00694
+
+[node name="Collectable" type="Node2D"]
+scale = Vector2(0.3480006, 0.3480006)
+
+[node name="Area2D" type="Area2D" parent="." groups=["Collectable"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+scale = Vector2(0.30640107, 0.30640107)
+texture = ExtResource("1_3rsma")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_un20x")
